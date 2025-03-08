@@ -177,13 +177,18 @@ const SignUp = () => {
     if (Object.keys(tempErrors).length === 0) {
       setIsSubmitting(true);
       try {
-        await dispatch(registerUser(userData));
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-        toast.success('Account created successfully! Redirecting to login page...');
+        const result = await dispatch(registerUser(userData));
+
+        if (result.success) {
+          toast.success('Account created successfully! Redirecting to login page...');
+          setTimeout(() => {
+            navigate('/login');
+          }, 2000);
+        } else {
+          toast.error(result.error); // Show specific error message
+        }
       } catch (err) {
-        toast.error('An error occurred. Please try again.');
+        toast.error('An unexpected error occurred. Please try again.');
       } finally {
         setIsSubmitting(false);
       }
@@ -213,7 +218,7 @@ const SignUp = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="space-y-5">
+          <div className="mt-8 space-y-6">
             {/* Username Field */}
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-100 mb-1">Username</label>

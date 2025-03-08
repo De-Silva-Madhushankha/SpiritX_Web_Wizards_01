@@ -18,8 +18,8 @@ export default function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/*" element={<NotFound />} />
 
         {/* Private Routes */}

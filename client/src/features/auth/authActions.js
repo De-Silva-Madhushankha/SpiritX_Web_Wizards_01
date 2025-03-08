@@ -6,8 +6,13 @@ export const loginUser = (credentials) => async (dispatch) => {
     dispatch(startLoading());
     const response = await axios.post('/api/auth/login', credentials);
     dispatch(setUser(response.data));
+    
+    return { success: true, data: response.data };
   } catch (error) {
-    dispatch(setError(error.response?.data?.message || 'Login failed'));
+    const errorMessage = error.response?.data?.message || 'Login failed';
+    dispatch(setError(errorMessage));
+
+    return { success: false, error: errorMessage };
   }
 };
 
@@ -16,7 +21,12 @@ export const registerUser = (userData) => async (dispatch) => {
     dispatch(startLoading());
     const response = await axios.post('/api/auth/register', userData);
     dispatch(setUser(response.data));
+
+    return { success: true, data: response.data }; 
   } catch (error) {
-    dispatch(setError(error.response?.data?.message || 'Registration failed'));
+    const errorMessage = error.response?.data?.message || 'Registration failed';
+    dispatch(setError(errorMessage));
+
+    return { success: false, error: errorMessage }; 
   }
 };
