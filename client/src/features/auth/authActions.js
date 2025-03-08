@@ -2,16 +2,17 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { startLoading, stopLoading, setUser, setError } from './authSlice';
 
-// Login user
 export const loginUser = createAsyncThunk(
-  'auth/login',
+  'auth/signin',
   async (credentials, { dispatch, rejectWithValue }) => {
     try {
       dispatch(startLoading());
-      const response = await axios.post('/api/auth/login', credentials);
+      const response = await axios.post('/auth/signin', credentials);
+      //console.log(response.data);
       dispatch(setUser(response.data));
       dispatch(stopLoading());
       return response.data;
+
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Login failed';
       dispatch(setError(errorMessage));
@@ -23,11 +24,11 @@ export const loginUser = createAsyncThunk(
 
 // Register user
 export const registerUser = createAsyncThunk(
-  'auth/register',
+  'auth/signup',
   async (userData, { dispatch, rejectWithValue }) => {
     try {
       dispatch(startLoading());
-      const response = await axios.post('/api/auth/register', userData);
+      const response = await axios.post('/auth/signup', userData);
       dispatch(setUser(response.data));
       dispatch(stopLoading());
       return response.data;

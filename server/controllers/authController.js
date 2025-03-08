@@ -58,7 +58,7 @@ export const signin = async (req, res, next) => {
 
     if (validUser) {
       const token = generateTokenAndSetCookie(validUser._id, res);
-      res.status(200).json(rest);
+      res.status(200).json({success:true,user:rest,token:token});
     }
   } catch (error) {
     next(error);

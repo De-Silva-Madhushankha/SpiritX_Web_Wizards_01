@@ -9,7 +9,6 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Form state
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -92,11 +91,9 @@ const SignIn = () => {
     return isValid;
   };
 
-  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate all fields
     if (!validateForm()) {
       return;
     }
@@ -106,7 +103,8 @@ const SignIn = () => {
       // Attempt to login
       const result = await dispatch(loginUser(formData));
 
-      if (result.success) {
+      console.log(result);
+      if (result.payload.success) {
         toast.success('Login successful!');
         navigate('/dashboard');
       } else {
