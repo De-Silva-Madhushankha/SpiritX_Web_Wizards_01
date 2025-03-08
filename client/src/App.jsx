@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ScrollToTop from './components/ScrollToTop';
 import PrivateRoute from './components/PrivateRoute';
+import ForgotPassword from './pages/ForgotPassword';
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 axios.defaults.withCredentials = true;
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/*" element={<NotFound />} />
 
         {/* Private Routes */}

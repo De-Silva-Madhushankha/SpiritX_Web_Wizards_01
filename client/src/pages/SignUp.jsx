@@ -180,9 +180,9 @@ const SignUp = () => {
         const result = await dispatch(registerUser(userData));
 
         if (result.success) {
-          toast.success('Account created successfully! Redirecting to login page...');
           setTimeout(() => {
             navigate('/login');
+            toast.success('Account created successfully! Redirecting to login page...');
           }, 2000);
         } else {
           toast.error(result.error); // Show specific error message
