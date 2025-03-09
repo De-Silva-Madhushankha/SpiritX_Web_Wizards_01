@@ -9,16 +9,13 @@ const ForgotPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // Step tracking
-    const [currentStep, setCurrentStep] = useState('email'); // 'email', 'otp', or 'reset'
+    const [currentStep, setCurrentStep] = useState('email');
 
-    // Form data
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    // UI states
     const [emailError, setEmailError] = useState('');
     const [otpError, setOtpError] = useState('');
     const [passwordErrors, setPasswordErrors] = useState({
@@ -30,7 +27,6 @@ const ForgotPassword = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState('');
 
-    // Email validation
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -46,7 +42,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // OTP validation
     const validateOTP = (otp) => {
         if (!otp.trim()) {
             setOtpError('OTP is required');
@@ -88,12 +83,10 @@ const ForgotPassword = () => {
         }
     };
 
-    // Password validation
     const validatePassword = () => {
         let valid = true;
         let error = '';
 
-        // Validate password
         if (!password.trim()) {
             error = 'Password is required';
             valid = false;
@@ -118,7 +111,6 @@ const ForgotPassword = () => {
         return valid;
     };
 
-    // Confirm password validation
     const validateConfirmPassword = () => {
         if (!confirmPassword.trim()) {
             setPasswordErrors({ confirmPassword: 'Confirm password is required' });
@@ -132,7 +124,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // Handle input changes
     const handleChange = (e, field) => {
         const value = e.target.value;
 
@@ -142,7 +133,6 @@ const ForgotPassword = () => {
                 validateEmail(value);
                 break;
             case 'otp':
-                // Only allow digits
                 const otpValue = value.replace(/\D/g, '').slice(0, 6);
                 setOtp(otpValue);
                 validateOTP(otpValue);
@@ -160,7 +150,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // Handle Step 1: Send OTP
     const handleSendOTP = async (e) => {
         e.preventDefault();
 
@@ -189,7 +178,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // Handle Step 2: Verify OTP
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
 
@@ -214,7 +202,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // Handle Step 3: Reset Password
     const handleResetPassword = async (e) => {
         e.preventDefault();
 
@@ -245,7 +232,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // Resend OTP handler
     const handleResendOTP = async () => {
         if (!validateEmail(email)) {
             return;
@@ -265,7 +251,6 @@ const ForgotPassword = () => {
         }
     };
 
-    // Toggle password visibility
     const togglePasswordVisibility = (field) => {
         if (field === 'password') {
             setShowPassword(!showPassword);
@@ -291,7 +276,6 @@ const ForgotPassword = () => {
                     </p>
                 </div>
 
-                {/* Step 1: Email Input */}
                 {currentStep === 'email' && (
                     <form onSubmit={handleSendOTP} className="mt-8 space-y-6">
                         <div className="space-y-2">
@@ -320,13 +304,12 @@ const ForgotPassword = () => {
 
                         <div className="text-center font-semibold">
                             <a href="/login" className="text-sm text-orange-400 hover:underline">
-                                Back to Login
+                                Back to Signin
                             </a>
                         </div>
                     </form>
                 )}
 
-                {/* Step 2: OTP Verification */}
                 {currentStep === 'otp' && (
                     <form onSubmit={handleVerifyOTP} className="mt-8 space-y-6">
                         <div className="space-y-2">
@@ -368,10 +351,8 @@ const ForgotPassword = () => {
                     </form>
                 )}
 
-                {/* Step 3: Reset Password */}
                 {currentStep === 'reset' && (
                     <form onSubmit={handleResetPassword} className="mt-8 space-y-6">
-                        {/* New Password */}
                         <div className="space-y-2">
                             <label htmlFor="password" className="block text-sm font-medium text-gray-100 mb-1">
                                 New Password
@@ -396,7 +377,6 @@ const ForgotPassword = () => {
                             </div>
                             {passwordErrors.password && <p className="mt-1 text-sm text-red-600">{passwordErrors.password}</p>}
 
-                            {/* Password Strength Indicator */}
                             {password && (
                                 <div className="mt-2">
                                     <div className="flex items-center">
@@ -412,7 +392,6 @@ const ForgotPassword = () => {
                                     </div>
                                 </div>
                             )}
-                            {/* Password Requirements */}
                             <div className="mt-2 grid grid-cols-2 gap-1">
                                 <p className={`text-xs ${/[a-z]/.test(password) ? 'text-green-600' : 'text-gray-300'}`}>• Add Lowercase letters</p>
                                 <p className={`text-xs ${/[A-Z]/.test(password) ? 'text-green-600' : 'text-gray-300'}`}>• Add Uppercase letters</p>
@@ -421,7 +400,6 @@ const ForgotPassword = () => {
                             </div>
                         </div>
 
-                        {/* Confirm Password */}
                         <div className="space-y-2">
                             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-100 mb-1">
                                 Confirm Password
