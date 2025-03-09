@@ -85,9 +85,7 @@ const ForgotPassword = () => {
     const validatePassword = (value) => {
         let valid = true;
         let error = '';
-
-        console.log(value)
-
+        
         if (!value.trim()) {
             error = 'Password is required';
             valid = false;
