@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
@@ -7,7 +7,7 @@ const NotFound = () => {
       <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
       <p className="text-muted-foreground mb-6">We couldn't find the page you were looking for.</p>
       <Link 
-        href="/login" 
+        to="/login" 
         className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
       >
         Return to Sign In
