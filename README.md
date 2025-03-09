@@ -125,13 +125,13 @@ SecureConnect/
 6. Start the server:
     ```bash
     cd server
-    npm start
+    npm run start
     ```
     
 7. Start the client:
     ```bash
-    cd client
-    npm start
+    cd ../client
+    npm run start
     ```
       
 - **Note** - The Ports your web app is running on might change from the steps given in the instructions; configure base URL, and cors policies depending on your settings.
