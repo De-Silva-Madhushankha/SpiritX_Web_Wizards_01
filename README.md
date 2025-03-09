@@ -130,7 +130,7 @@ SecureConnect/
     
 7. Start the client:
     ```bash
-    cd ../client
+    cd client
     npm run start
     ```
       
