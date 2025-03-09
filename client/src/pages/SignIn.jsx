@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../features/auth/authActions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
@@ -177,9 +177,9 @@ const SignIn = () => {
           </div>
 
           <div className="text-center font-semibold">
-            <a href="/forgot-password" className="text-sm text-orange-400 hover:underline">
+            <Link to="/forgot-password" className="text-sm text-orange-400 hover:underline">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           <div>
@@ -198,9 +198,9 @@ const SignIn = () => {
           <div className="mt-6 text-center">
             <p className="text-gray-100">
               Don't have an account?{' '}
-              <a href="/register" className="text-orange-400 hover:text-orange-500 font-medium">
+              <Link to="/register" className="text-orange-400 hover:text-orange-500 font-medium">
                 Sign Up
-              </a>
+              </Link>
             </p>
           </div>
         </form>
