@@ -6,14 +6,6 @@ import { errorHandler } from '../utils/errorHandler.js';
 import { generateTokenAndSetCookie, clearCookie } from '../utils/jwtUtils.js';
 import { sendEmail } from '../utils/sendEmail.js';
 
-export const getUsers = async (req, res, next) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-}
 
 export const checkUsername = async (req, res, next) => {
   try {
@@ -21,7 +13,7 @@ export const checkUsername = async (req, res, next) => {
     const user = await User
       .findOne({ username })
       .select('username');
-    console.log(user);
+
     if (user) { 
       res.status(200).json({ available: false });
     } else {

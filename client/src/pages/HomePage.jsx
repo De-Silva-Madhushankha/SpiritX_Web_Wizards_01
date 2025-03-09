@@ -44,8 +44,8 @@ const Home = () => {
 
       <div className="relative bg-white/10 p-8 rounded-3xl backdrop-filter backdrop-blur-md border border-white/20 shadow-2xl w-full max-w-md z-10 text-white">
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-100">Welcome!</h2>
-          <h3 className="text-gray-300 mt-2">{user}</h3>
+          <h1 className="text-6xl font-bold text-gray-100">Welcome!</h1>
+          <h1 className="text-gray-300 mt-2 text-4xl">{user}</h1>
         </div>
         <div>
             <button

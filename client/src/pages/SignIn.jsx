@@ -168,7 +168,7 @@ const SignIn = () => {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-300 hover:text-gray-100 transition-colors"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-400 transition-colors"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
