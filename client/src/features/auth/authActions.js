@@ -35,8 +35,6 @@ export const registerUser = createAsyncThunk(
 
       const response = await axios.post('/auth/signup', userData);
 
-      console.log(response.data);
-
       dispatch(setUser(response.data));
       dispatch(stopLoading());
       return response.data;
@@ -54,7 +52,7 @@ export const logoutUser = createAsyncThunk(
   async (_, { dispatch, rejectWithValue }) => {
     try {
       dispatch(startLoading());
-      await axios.post('/auth/signout');
+      const response = await axios.post('/auth/signout');
       dispatch(setUser({
         user: null,
         token: null,
@@ -63,7 +61,7 @@ export const logoutUser = createAsyncThunk(
       dispatch(stopLoading());
       return { success: true };
     } catch (error) {
-      console.log(error);
+      
       const errorMessage = error.response?.data?.message || 'Logout failed';
       dispatch(setError(errorMessage));
       dispatch(stopLoading());

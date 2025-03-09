@@ -4,7 +4,7 @@ import { errorHandler } from './errorHandler.js';
 export const generateTokenAndSetCookie = (userId, res) => {
 
   const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
-    expiresIn: '1d',
+    expiresIn: '6h',
   });
 
   res.cookie('access_token', token, {
@@ -31,7 +31,7 @@ export const verifyToken = (req, res, next) => {
 }
 
 export const clearCookie = (res) => {
-  res.clearCookie('access_token').status(200).json({ message: 'Signout successfully' });
+  res.clearCookie('access_token').status(200).json({success:true, message: 'Signout successfully' });
 };
 
 

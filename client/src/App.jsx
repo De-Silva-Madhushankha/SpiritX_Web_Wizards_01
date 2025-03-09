@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import HomePage from './pages/HomePage';
+import Home from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -17,16 +17,15 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-        {/* Public Routes */}
+
         <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/*" element={<NotFound />} />
 
-        {/* Private Routes */}
         <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<HomePage />} />
+          <Route path="/dashboard" element={<Home />} />
         </Route>
         
       </Routes>
