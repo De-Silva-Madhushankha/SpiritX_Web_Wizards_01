@@ -180,7 +180,7 @@ const SignUp = () => {
             toast.success('Account created successfully!');
           }, 2000);
         } else {
-          toast.error(result.error); // Show specific error message
+          toast.error(result.payload.message); // Show specific error message
         }
       } catch (err) {
         toast.error('An unexpected error occurred. Please try again.');
