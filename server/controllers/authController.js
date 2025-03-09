@@ -46,7 +46,7 @@ export const signup = async (req, res, next) => {
     }
   } catch (error) {
     if (error.code === 11000) {
-      return next(errorHandler(400, 'Email already exists'));
+      return res.status(400).json({ success: false, message: 'Email already exists' });
     }
   }
 }

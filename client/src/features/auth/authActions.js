@@ -42,6 +42,7 @@ export const registerUser = createAsyncThunk(
       const errorMessage = error.response?.data?.message || 'Registration failed';
       dispatch(setError(errorMessage));
       dispatch(stopLoading());
+
       return rejectWithValue(errorMessage);
     }
   }
