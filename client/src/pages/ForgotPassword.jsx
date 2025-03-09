@@ -86,6 +86,8 @@ const ForgotPassword = () => {
         let valid = true;
         let error = '';
 
+        console.log(value)
+
         if (!value.trim()) {
             error = 'Password is required';
             valid = false;
@@ -204,7 +206,7 @@ const ForgotPassword = () => {
     const handleResetPassword = async (e) => {
         e.preventDefault();
 
-        if (!validatePassword()) {
+        if (!validatePassword(password)) {
             return;
         }
 
