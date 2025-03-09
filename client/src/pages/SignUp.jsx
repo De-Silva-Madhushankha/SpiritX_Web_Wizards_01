@@ -113,7 +113,6 @@ const SignUp = () => {
       const response = await axios.get(`/auth/check-username?username=${username}`);
       return response.data.available; 
     } catch (error) {
-      toast.error('Error checking username availability');
       return false;
     }
   };
