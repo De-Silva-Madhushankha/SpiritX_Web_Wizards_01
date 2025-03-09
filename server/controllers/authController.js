@@ -6,14 +6,6 @@ import { errorHandler } from '../utils/errorHandler.js';
 import { generateTokenAndSetCookie, clearCookie } from '../utils/jwtUtils.js';
 import { sendEmail } from '../utils/sendEmail.js';
 
-export const getUsers = async (req, res, next) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-}
 
 export const checkUsername = async (req, res, next) => {
   try {
@@ -21,7 +13,7 @@ export const checkUsername = async (req, res, next) => {
     const user = await User
       .findOne({ username })
       .select('username');
-    console.log(user);
+
     if (user) { 
       res.status(200).json({ available: false });
     } else {
@@ -91,7 +83,6 @@ export const signout = (req, res) => {
 }
 
 export const sendOTP = async (req, res) => {
-  console.log("Inside sendOTP");
   const { email} = req.body;
 
   try {
@@ -100,11 +91,9 @@ export const sendOTP = async (req, res) => {
     }
 
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found." });
     }
-    console.log(user);
 
     const otp = crypto.randomInt(100000, 999999).toString();
     const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
@@ -121,7 +110,6 @@ export const sendOTP = async (req, res) => {
 
     res.status(200).json({ success: true, message: "OTP sent to your email." });
   } catch (error) {
-    console.error("Error sending OTP:", error);
     res.status(500).json({ success: false, message: "Failed to send OTP." });
   }
 };
@@ -166,7 +154,6 @@ export const resetPassword = async (req, res) => {
     await Otp.deleteMany({ email });
     res.status(200).json({ success: true, message: "Password reset successful." });
   } catch (error) {
-    console.error("Error resetting password:", error);
     res.status(500).json({ success: false, message: "Failed to reset password." });
   }
 };

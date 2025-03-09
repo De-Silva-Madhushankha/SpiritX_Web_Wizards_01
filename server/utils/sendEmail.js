@@ -22,16 +22,13 @@ export const sendEmail = async ({ to, subject, text }) => {
     });
     
     const mailOptions = {
-      from: `"SecureConnect.lk" <${process.env.SMTP_USER || "default@example.com"}>`,
+      from: `"SecureConnect.lk" <${process.env.SMTP_USER || "secureconnect@spiritx.com"}>`,
       to,
       subject,
       text,
     };
 
     const info = await transporter.sendMail(mailOptions);
-console.log(info.response);
-
-    console.log(`Email sent successfully to ${to}. Message ID: ${info.messageId}`);
     return info;
   } catch (error) {
     console.error(`Error sending email to ${to}:`, error.message, {

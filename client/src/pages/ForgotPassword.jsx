@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { sendOTP, verifyOTP, resetPassword } from '../features/auth/authActions';
 import { toast } from 'react-toastify';
@@ -302,9 +302,9 @@ const ForgotPassword = () => {
                         </div>
 
                         <div className="text-center font-semibold">
-                            <a href="/login" className="text-sm text-orange-400 hover:underline">
+                            <Link to="/login" className="text-sm text-orange-400 hover:underline">
                                 Back to Sign In
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 )}
