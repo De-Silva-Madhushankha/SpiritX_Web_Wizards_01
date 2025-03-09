@@ -1,8 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import {toast} from 'react-toastify';
+import { logoutUser } from '../features/auth/authActions';
+import { useNavigate } from 'react-router-dom'; 
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(state => state.auth.user.username);
     const [errors, setErrors] = useState({
     submit: '',
@@ -17,10 +22,11 @@ const Home = () => {
         const result = await dispatch(logoutUser());
  
         if (result.payload.success) {
-          toast.message('Signout successful!');
-          navigate('/login');
+          toast.info('Signout successful!');
+          navigate('/login', { replace: true });
         }
       } catch (error) {
+        console.error(error);
         setErrors({ ...errors, submit: error.message });
         toast.error('Signout failed. Please try again.');
       } finally {
@@ -44,7 +50,7 @@ const Home = () => {
         <div>
             <button
               type="submit"
-              onSubmit={handleSubmit}
+              onClick={handleSubmit}
               disabled={isSubmitting}
               className={`w-full py-3 rounded-lg font-medium text-white transition-all duration-300 ${isSubmitting || Object.values(errors).some(err => err !== '')
                 ? 'bg-orange-400 cursor-not-allowed'

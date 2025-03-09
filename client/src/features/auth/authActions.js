@@ -50,15 +50,20 @@ export const registerUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  'auth/logout',
+  'auth/signout',
   async (_, { dispatch, rejectWithValue }) => {
     try {
       dispatch(startLoading());
       await axios.post('/auth/signout');
-      dispatch(setUser(null));
+      dispatch(setUser({
+        user: null,
+        token: null,
+        error: null,
+      }));
       dispatch(stopLoading());
       return { success: true };
     } catch (error) {
+      console.log(error);
       const errorMessage = error.response?.data?.message || 'Logout failed';
       dispatch(setError(errorMessage));
       dispatch(stopLoading());

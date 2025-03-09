@@ -45,13 +45,11 @@ export const signup = async (req, res, next) => {
     await user.save();
     const userResponse = user.toObject();
     delete userResponse.password;
-    console.log(userResponse);
 
     if (userResponse) {
       res.status(201).send({ success: true, message: "User created successfully", user: userResponse });
     }
   } catch (error) {
-    console.log(error);
     if (error.code === 11000) {
       return next(errorHandler(400, 'Email already exists'));
     }
@@ -85,7 +83,7 @@ export const signin = async (req, res, next) => {
 };
 
 
-export const signout = (req, res,) => {
+export const signout = (req, res) => { 
   clearCookie(res);
 }
 
