@@ -9,7 +9,7 @@ const ForgotPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [currentStep, setCurrentStep] = useState('reset');
+    const [currentStep, setCurrentStep] = useState('email');
 
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
