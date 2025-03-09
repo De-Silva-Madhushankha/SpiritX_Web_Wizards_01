@@ -11,15 +11,15 @@ Welcome to **SecureConnect**, a secure and user-friendly authentication system! 
 - Passwords are hashed before being stored in the database.
 - Prevents signup if the username or email already exists.
 
-### Login Page
+### Signin Page
 
 - Users can log in using their registered **Username** and **Password**.
 - Real-time validation with error messages under each field.
 - Validation rules similar to the signup page.
 - Prevents login if the username doesn’t exist or the password is incorrect.
-- Upon successful login, users are greeted with a personalized message: **"Hello, [Username]!"**.
-- Basic session management keeps users logged in until they click the **Logout** button.
-- Clicking **Logout** redirects users to the login page.
+- Upon successful login, users are greeted with a personalized message: **"Welcome, [Username]!"**.
+- Basic session management keeps users logged in until they click the **Signout** button.
+- Clicking **Signout** redirects users to the login page.
 
 ### OTP for Password Reset
 
@@ -108,24 +108,34 @@ SecureConnect/
     SMTP_USER="your_email@gmail.com"
     SMTP_PASSWORD="your_email_password"
     ```
-
-4. Start the server:
+4. Create a `.env` file in the `client` directory and add the following:
+    ```properties
+    VITE_BASE_URL="http://localhost:5000/api"
+    ```
+5. Start the server:
     ```bash
     cd server
     npm start
     ```
-
-5. Start the client:
+    
+6. Start the client:
     ```bash
     cd client
     npm start
     ```
-
 ## Usage
 
 - Open your browser and navigate to `http://localhost:3000` to access the application.
 - Sign up for a new account or log in with existing credentials.
 - Use the forgot password feature to reset your password using OTP.
+- **Note** - Your Ports Might Change from ours; configure depending on your settings.
+
+## Technologies Used
+
+- **React.js** - Frontend framework
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **JavaScript** - Core functionality
 
 
 
