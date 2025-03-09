@@ -14,13 +14,11 @@ const SignIn = () => {
     password: ''
   });
 
-  // Error state
   const [errors, setErrors] = useState({
     username: '',
     password: ''
   });
 
-  // Show/hide password
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -49,7 +47,7 @@ const SignIn = () => {
       case 'password':
         if (value.trim() === '') {
           errorMessage = 'Password is required';
-        } else if (value.length < 6) {
+        } else if (value.length < 8) {
           errorMessage = 'Password must be 8 characters';
         }
         break;
@@ -80,7 +78,7 @@ const SignIn = () => {
     if (formData.password.trim() === '') {
       newErrors.password = 'Password is required';
       isValid = false;
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.length < 8) {
       newErrors.password = 'Password must be 8 characters';
       isValid = false;
     } else {
@@ -100,12 +98,10 @@ const SignIn = () => {
 
     setIsSubmitting(true);
     try {
-      // Attempt to login
       const result = await dispatch(loginUser(formData));
 
-      console.log(result);
       if (result.payload.success) {
-        toast.success('Login successful!');
+        toast.success('Signin successful!');
         navigate('/dashboard');
       } else {
         // Handle incorrect username/password
@@ -118,13 +114,12 @@ const SignIn = () => {
         }
       }
     } catch (error) {
-      toast.error('Login failed. Please try again.');
+      toast.error('Signin failed. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -144,7 +139,6 @@ const SignIn = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          {/* Username Input */}
           <div className="space-y-2">
             <label htmlFor="username" className="block text-sm font-medium text-gray-100 mb-1">Username</label>
             <input
@@ -159,7 +153,6 @@ const SignIn = () => {
             {errors.username && <p className="mt-1 text-sm text-red-500">{errors.username}</p>}
           </div>
 
-          {/* Password Input */}
           <div className="space-y-2">
             <label htmlFor="password" className="block text-sm font-medium text-gray-100 mb-1">Password</label>
             <div className="relative">
@@ -183,14 +176,12 @@ const SignIn = () => {
             {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
           </div>
 
-          {/* Forgot Password */}
           <div className="text-center font-semibold">
             <a href="/forgot-password" className="text-sm text-orange-400 hover:underline">
               Forgot password?
             </a>
           </div>
 
-          {/* Submit Button */}
           <div>
             <button
               type="submit"
@@ -204,12 +195,11 @@ const SignIn = () => {
             </button>
           </div>
 
-          {/* Sign Up Link */}
           <div className="mt-6 text-center">
             <p className="text-gray-100">
               Don't have an account?{' '}
               <a href="/register" className="text-orange-400 hover:text-orange-500 font-medium">
-                Sign In
+                Sign Up
               </a>
             </p>
           </div>

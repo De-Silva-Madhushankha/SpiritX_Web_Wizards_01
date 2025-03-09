@@ -8,7 +8,6 @@ export const loginUser = createAsyncThunk(
     try {
       dispatch(startLoading());
       const response = await axios.post('/auth/signin', credentials);
-      //console.log(response.data);
       dispatch(setUser(response.data));
       dispatch(stopLoading());
       return response.data;
@@ -22,13 +21,22 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// Register user
 export const registerUser = createAsyncThunk(
   'auth/signup',
   async (userData, { dispatch, rejectWithValue }) => {
     try {
       dispatch(startLoading());
+
+      userData = {
+        username: userData.username,
+        email: userData.email.toLowerCase(),
+        password: userData.password
+      };
+
       const response = await axios.post('/auth/signup', userData);
+
+      console.log(response.data);
+
       dispatch(setUser(response.data));
       dispatch(stopLoading());
       return response.data;
@@ -41,13 +49,12 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// Logout user
 export const logoutUser = createAsyncThunk(
   'auth/logout',
   async (_, { dispatch, rejectWithValue }) => {
     try {
       dispatch(startLoading());
-      await axios.post('/api/auth/logout');
+      await axios.post('/auth/signout');
       dispatch(setUser(null));
       dispatch(stopLoading());
       return { success: true };
@@ -60,12 +67,11 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-// Send OTP for password reset
 export const sendOTP = createAsyncThunk(
   'auth/sendOTP',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/api/auth/forgot-password/send-otp', data);
+      const response = await axios.post('/auth/forgot-password/send-otp', data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -75,12 +81,11 @@ export const sendOTP = createAsyncThunk(
   }
 );
 
-// Verify OTP
 export const verifyOTP = createAsyncThunk(
   'auth/verifyOTP',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/api/auth/forgot-password/verify-otp', data);
+      const response = await axios.post('/auth/forgot-password/verify-otp', data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -90,12 +95,12 @@ export const verifyOTP = createAsyncThunk(
   }
 );
 
-// Reset password with verified OTP
+
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/api/auth/forgot-password/reset-password', data);
+      const response = await axios.post('/auth/forgot-password/reset-password', data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
