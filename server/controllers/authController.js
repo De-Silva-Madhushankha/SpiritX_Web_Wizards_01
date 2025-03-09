@@ -91,6 +91,7 @@ export const signout = (req, res) => {
 }
 
 export const sendOTP = async (req, res) => {
+  console.log("Inside sendOTP");
   const { email} = req.body;
 
   try {
@@ -99,6 +100,7 @@ export const sendOTP = async (req, res) => {
     }
 
     const user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found." });
     }
