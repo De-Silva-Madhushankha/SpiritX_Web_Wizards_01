@@ -9,14 +9,13 @@ const ForgotPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [currentStep, setCurrentStep] = useState('email');
+    const [currentStep, setCurrentStep] = useState('reset');
 
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [errors, setErrors] = useState({});
     const [emailError, setEmailError] = useState('');
     const [otpError, setOtpError] = useState('');
     const [passwordErrors, setPasswordErrors] = useState({
@@ -64,14 +63,13 @@ const ForgotPassword = () => {
             return;
         }
 
-        if (password.length > 8 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        if (password.length >= 8 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
             strength = 'strong';
         } else if (password.length >= 6) {
             strength = 'medium';
         } else {
             strength = 'weak';
         }
-
         setPasswordStrength(strength);
     };
 
@@ -84,51 +82,51 @@ const ForgotPassword = () => {
         }
     };
 
-    const validatePassword = () => {
+    const validatePassword = (value) => {
         let valid = true;
         let error = '';
 
-        if (!password.trim()) {
+        if (!value.trim()) {
             error = 'Password is required';
             valid = false;
-        } else if (password.length < 8) {
+        } else if (value.length < 8) {
             error = 'Password must be at least 8 characters';
             valid = false;
-        } else if (!/[A-Z]/.test(password)) {
+        } else if (!/[A-Z]/.test(value)) {
             error = 'Password must contain at least one uppercase letter';
             valid = false;
-        } else if (!/[a-z]/.test(password)) {
+        } else if (!/[a-z]/.test(value)) {
             error = 'Password must contain at least one lowercase letter';
             valid = false;
-        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
             error = 'Password must contain at least one special character';
             valid = false;
         } else {
             error = '';
         }
 
-        evaluatePasswordStrength(password);
+        evaluatePasswordStrength(value);
         setPasswordErrors({ ...passwordErrors, password: error });
         return valid;
     };
 
-    const validateConfirmPassword = () => {
-        if (!confirmPassword.trim()) {
-            setPasswordErrors({ confirmPassword: 'Confirm password is required' });
+    const validateConfirmPassword = (value) => {
+        if (!value.trim()) {
+            setPasswordErrors({ ...passwordErrors, confirmPassword: 'Confirm password is required' });
             return false;
-        } else if (password !== confirmPassword) {
-            setPasswordErrors({ confirmPassword: 'Passwords do not match' });
+        } else if (password !== value) {
+            setPasswordErrors({ ...passwordErrors, confirmPassword: 'Passwords do not match' });
             return false;
         } else {
-            setPasswordErrors({ confirmPassword: '' });
+            setPasswordErrors({ ...passwordErrors, confirmPassword: '' });
             return true;
         }
     };
 
-    const handleChange = (e, field) => {
-        const value = e.target.value;
+    const handleChange = (e) => {
+        const {id, value } = e.target;
 
-        switch (field) {
+        switch (id) {
             case 'email':
                 setEmail(value);
                 validateEmail(value);
@@ -140,11 +138,11 @@ const ForgotPassword = () => {
                 break;
             case 'password':
                 setPassword(value);
-                validatePassword();
+                validatePassword(value);
                 break;
             case 'confirmPassword':
                 setConfirmPassword(value);
-                validateConfirmPassword();
+                validateConfirmPassword(value);
                 break;
             default:
                 break;
@@ -286,11 +284,11 @@ const ForgotPassword = () => {
                                 name="email"
                                 type="email"
                                 value={email}
-                                onChange={(e) => handleChange(e, 'email')}
+                                onChange={handleChange}
                                 className={`w-full px-4 py-3 rounded-lg border ${emailError ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none`}
                                 placeholder="Enter your email address"
                             />
-                            {emailError && <p className="mt-1 text-sm text-red-500">{errors.username}</p>}
+                            {emailError && <p className="mt-1 text-sm text-red-500">{emailError}</p>}
                         </div>
 
                         <div>
@@ -322,7 +320,7 @@ const ForgotPassword = () => {
                                 name="otp"
                                 type="text"
                                 value={otp}
-                                onChange={(e) => handleChange(e, 'otp')}
+                                onChange={handleChange}
                                 className={`w-full px-4 py-3 rounded-lg border ${otpError ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none`}
                                 placeholder="Enter 6-digit code"
                                 maxLength={6}
@@ -330,6 +328,9 @@ const ForgotPassword = () => {
                             {otpError && <p className="mt-1 text-sm text-red-600">{otpError}</p>}
                             <p className="text-sm text-gray-300">
                                 A 6-digit verification code has been sent to {email}
+                            </p>
+                            <p className="text-xs text-gray-300">
+                                *Didn't receive the code? also check your spam folder.
                             </p>
                         </div>
 
@@ -364,7 +365,7 @@ const ForgotPassword = () => {
                                     name="password"
                                     type={showPassword ? 'text' : 'password'}
                                     value={password}
-                                    onChange={(e) => handleChange(e, 'password')}
+                                    onChange={handleChange}
                                     className={`w-full px-4 py-3 rounded-lg border ${passwordErrors.password ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none`}
                                     placeholder="Create a strong password"
                                 />
@@ -411,7 +412,7 @@ const ForgotPassword = () => {
                                     name="confirmPassword"
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     value={confirmPassword}
-                                    onChange={(e) => handleChange(e, 'confirmPassword')}
+                                    onChange={handleChange}
                                     className={`w-full px-4 py-3 rounded-lg border ${passwordErrors.confirmPassword ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none`}
                                     placeholder="Confirm your new password"
                                 />

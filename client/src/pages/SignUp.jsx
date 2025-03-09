@@ -126,7 +126,7 @@ const SignUp = () => {
       return;
     }
 
-    if (password.length > 8 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    if (password.length >= 8 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
       strength = 'strong';
     } else if (password.length >= 6) {
       strength = 'medium';
@@ -177,7 +177,7 @@ const SignUp = () => {
         if (result.payload.success) {
           setTimeout(() => {
             navigate('/login');
-            toast.success('Account created successfully! Redirecting to login page...');
+            toast.success('Account created successfully!');
           }, 2000);
         } else {
           toast.error(result.error); // Show specific error message
