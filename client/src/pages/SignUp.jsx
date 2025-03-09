@@ -173,14 +173,14 @@ const SignUp = () => {
       setIsSubmitting(true);
       try {
         const result = await dispatch(registerUser(userData));
-
+        
         if (result.payload.success) {
           setTimeout(() => {
             navigate('/login');
             toast.success('Account created successfully!');
           }, 2000);
         } else {
-          toast.error(result.payload.message); // Show specific error message
+          toast.error(result.payload); // Show specific error message
         }
       } catch (err) {
         toast.error('An unexpected error occurred. Please try again.');
