@@ -3,7 +3,8 @@ import Otp from '../models/otpModel.js';
 import crypto from 'crypto';
 import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/errorHandler.js';
-import { generateTokenAndSetCookie, clearCookie, sendEmail } from '../utils/jwtUtils.js';
+import { generateTokenAndSetCookie, clearCookie } from '../utils/jwtUtils.js';
+import { sendEmail } from '../utils/sendEmail.js';
 
 export const getUsers = async (req, res, next) => {
   try {
