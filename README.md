@@ -19,7 +19,7 @@ Welcome to **SecureConnect**, a secure and user-friendly authentication system! 
 - Prevents login if the username doesn’t exist or the password is incorrect.
 - Upon successful login, users are greeted with a personalized message: **"Welcome, [Username]!"**.
 - Basic session management keeps users logged in until they click the **Signout** button.
-- Clicking **Signout** redirects users to the login page.
+- Clicking **Signout** redirects users to the Signin page.
 
 ### OTP for Password Reset
 
@@ -74,7 +74,7 @@ SecureConnect/
 │── .gitignore
 ```
 
-## Installation
+## Installation Guidelines
 
 ### Prerequisites
 
@@ -86,7 +86,7 @@ SecureConnect/
 1. Clone the repository:
     ```bash
     git clone https://github.com/De-Silva-Madhushankha/SpiritX_Web_Wizards_01.git
-    cd SecureConnect
+    cd SpiritX_Web_Wizards_01
     ```
 
 2. Install dependencies for both client and server:
@@ -106,36 +106,61 @@ SecureConnect/
     SMTP_HOST="smtp.gmail.com"
     SMTP_PORT=587
     SMTP_USER="your_email@gmail.com"
-    SMTP_PASSWORD="your_email_password"
+    SMTP_PASSWORD=" your gmail app password"
     ```
-4. Create a `.env` file in the `client` directory and add the following:
+
+    In order to use Nodemailer, you can't use your normal Gmail account password; instead, you must create an app password.
+    Please just follow this if you are not familiar with this step.
+    <a  href=https://bestsoftware.medium.com/how-to-create-an-app-password-on-gmail-e00eff3af4e0> how-to-create-an-app-password-on-gmail </a>
+
+    Replace MONGO_URI with a MongoDB connection you obtained.
+    Please follow the below steps to set up a MongoDB database.
+    <a href = https://www.mongodb.com/resources/products/fundamentals/create-database > how-to-create-a-database-in-mongodb </a>
+   
+    
+5. Create a `.env` file in the `client` directory and add the following:
     ```properties
     VITE_BASE_URL="http://localhost:5000/api"
     ```
-5. Start the server:
+6. Start the server:
     ```bash
     cd server
     npm start
     ```
     
-6. Start the client:
+7. Start the client:
     ```bash
     cd client
     npm start
     ```
+      
+- **Note** - The Ports your web app is running on might change from the steps given in the instructions; configure base URL, and cors policies depending on your settings.
+-  [express cors](https://expressjs.com/en/resources/middleware/cors.html)
 ## Usage
 
 - Open your browser and navigate to `http://localhost:3000` to access the application.
 - Sign up for a new account or log in with existing credentials.
 - Use the forgot password feature to reset your password using OTP.
-- **Note** - Your Ports Might Change from ours; configure depending on your settings.
 
-## Technologies Used
 
-- **React.js** - Frontend framework
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
-- **JavaScript** - Core functionality
+
+## Tech Stack  
+
+### Frontend  
+-  **React.js** – Frontend framework  
+-  **Vite** – Lightning-fast build tool  
+-  **Tailwind CSS** – Utility-first CSS framework  
+-  **JavaScript** – Core language for front-end logic  
+
+### Backend  
+-  **Express.js** – Minimalist web framework for Node.js  
+-  **MongoDB** – NoSQL database  
+-  **Mongoose** – ODM for MongoDB  
+
+### Other  
+-  **JWT** – Authentication & authorization  
+
+
 
 
 
