@@ -17,14 +17,13 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-        {/* Public Routes */}
+
         <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/*" element={<NotFound />} />
 
-        {/* Private Routes */}
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Home />} />
         </Route>

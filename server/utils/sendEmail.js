@@ -22,7 +22,7 @@ export const sendEmail = async ({ to, subject, text }) => {
     });
     
     const mailOptions = {
-      from: `"SecureConnect.lk" <${process.env.SMTP_USER || "default@example.com"}>`,
+      from: `"SecureConnect.lk" <${process.env.SMTP_USER || "secureconnect@spiritx.com"}>`,
       to,
       subject,
       text,
